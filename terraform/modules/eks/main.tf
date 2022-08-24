@@ -93,9 +93,10 @@ resource "aws_iam_role_policy_attachment" "node-AmazonEC2ContainerRegistryReadOn
   role       = aws_iam_role.node.name
 }
 
-resource "aws_eks_node_group" "node-1" {
+resource "aws_eks_node_group" "node" {
+  count = 2
   cluster_name = aws_eks_cluster.cluster.name
-  node_group_name = "${var.prefix}-${var.cluster_name}-node"
+  node_group_name = "${var.prefix}-${var.cluster_name}-node-${[count.index]}"
   node_role_arn = aws_iam_role.node.arn
   subnet_ids = var.subnet_ids
   instance_types = var.aws_instance_types
@@ -112,21 +113,3 @@ resource "aws_eks_node_group" "node-1" {
   ]
 }
 
-resource "aws_eks_node_group" "node-2" {
-  cluster_name = aws_eks_cluster.cluster.name
-  node_group_name = "${var.prefix}-${var.cluster_name}-node-2"
-  node_role_arn = aws_iam_role.node.arn
-  subnet_ids = var.subnet_ids
-  instance_types = var.aws_instance_types
-  scaling_config {
-    desired_size = var.desired_size
-    max_size = var.max_size
-    min_size = var.min_size
-  }
-  
-  depends_on = [
-    aws_iam_role_policy_attachment.node-AmazonEKSWorkerNodePolicy,
-    aws_iam_role_policy_attachment.node-AmazonEKS_CNI_Policy,
-    aws_iam_role_policy_attachment.node-AmazonEC2ContainerRegistryReadOnly,
-  ]
-}

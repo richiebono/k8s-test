@@ -1,7 +1,10 @@
-name: "2 - Build Transaction Backend"
+name: "2 - Deploy"
 on:
-  push:
-          branches: [main]   
+  workflow_run:
+    workflows: ["1 - Provisioning Environment"]
+    branches: [main]
+    types: 
+      - completed
     
 
 jobs:
@@ -11,7 +14,7 @@ jobs:
         env:
           DOCKER_REPOSITORY: richiebono
           IMAGE_NAME: k8s-test
-          IMAGE_TAG: ${{github.run_number}} # ${{ github.sha }}
+          IMAGE_TAG: ${{github.run_number}}
           WORKING_DIRECTORY: .
           CLUSTER_NAME: k8s-test
           CLUSTER_REGION: us-east-1

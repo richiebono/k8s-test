@@ -87,12 +87,11 @@ jobs:
           run: |                    
             kubectl apply -f k8s/server1/deployment.yaml
             kubectl apply -f k8s/server1/service.yaml 
-            kubectl delete deployment webserver
 
-        # - name: Deploy image server 2 to Amazon EKS
-        #   run: |           
-        #     kubectl apply -f k8s/server2/deployment.yaml
-        #     kubectl apply -f k8s/server2/service.yaml 
+        - name: Deploy image server 2 to Amazon EKS
+          run: |           
+            kubectl apply -f k8s/server2/deployment.yaml
+            kubectl apply -f k8s/server2/service.yaml 
 
         # - name: Deploy image server 2 to Amazon EKS
         #   run: |           

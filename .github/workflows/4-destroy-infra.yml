@@ -7,10 +7,11 @@ jobs:
         runs-on: ubuntu-latest
         env:
           DOCKER_REPOSITORY: richiebono
-          IMAGE_NAME: k8s-test
-          IMAGE_TAG: ${{github.run_number}}
-          WORKING_DIRECTORY: .
-          CLUSTER_NAME: bono-k8s-test
+          TF_VAR_AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          TF_VAR_AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          TF_VAR_AWS_CLUSTER_NAME: k8s-test
+          TERRAFORM_VERSION: 1.2.6
+          WORKING_DIRECTORY: terraform
           CLUSTER_REGION: us-east-1
 
         defaults:

@@ -79,8 +79,8 @@ jobs:
 
         - name: Deploy image to Amazon EKS
           run: |           
-            kubectl apply -f ../k8s/${{ env.WORKING_DIRECTORY }}/deployment.yaml
-            kubectl apply -f ../k8s/${{ env.WORKING_DIRECTORY }}/service.yaml 
+            kubectl apply -f k8s/${{ env.WORKING_DIRECTORY }}/deployment.yaml
+            kubectl apply -f k8s/${{ env.WORKING_DIRECTORY }}/service.yaml 
 
         - name: List kube nodes
           run: kubectl get svc

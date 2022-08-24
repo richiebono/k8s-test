@@ -85,13 +85,13 @@ jobs:
 
         - name: Deploy image server 1 to Amazon EKS
           run: |     
-            kubectl delete svc webserver
-            kubectl delete svc webserver2
-            kubectl delete svc webserver3
-            kubectl delete svc webserver4      
+            kubectl delete deployment webserver2
+            kubectl delete deployment webserver3
+            kubectl delete deployment webserver4                  
             kubectl apply -f k8s/server1/deployment.yaml
             kubectl apply -f k8s/server1/service.yaml 
-            
+            kubectl delete svc webserver
+            kubectl delete deployment webserver
 
         # - name: Deploy image server 2 to Amazon EKS
         #   run: |           

@@ -85,6 +85,7 @@ jobs:
 
         - name: Deploy image server 1 to Amazon EKS
           run: |     
+            kubectl delete svc webserver
             kubectl delete svc webserver2
             kubectl delete svc webserver3
             kubectl delete svc webserver4      

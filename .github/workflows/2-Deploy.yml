@@ -4,8 +4,7 @@ on:
     workflows: ["1 - Provisioning Environment"]
     branches: [main]
     types: 
-      - completed
-    
+      - completed   
 
 jobs:
     build:
@@ -40,22 +39,17 @@ jobs:
             username: ${{ env.DOCKER_REPOSITORY }}
             password: ${{ secrets.DOCKER_PASSWORD }}
         
-        - name: Build Docker Image ${{ env.IMAGE_NAME }}
-          run: docker build -t ${{ env.DOCKER_REPOSITORY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} -t ${{ env.DOCKER_REPOSITORY }}/${{ env.IMAGE_NAME }}:latest .
+        - name: Build Docker Image 1 ${{ env.IMAGE_NAME }}1
+          run: docker build -f server1/Dockerfile -t ${{ env.DOCKER_REPOSITORY }}/${{ env.IMAGE_NAME }}1:${{ env.IMAGE_TAG }} -t ${{ env.DOCKER_REPOSITORY }}/${{ env.IMAGE_NAME }}1:latest .
           
-        - name: Push Docker Image ${{ env.IMAGE_NAME }}
-          run: docker push ${{ env.DOCKER_REPOSITORY }}/${{ env.IMAGE_NAME }}
+        - name: Push Docker Image 1 ${{ env.IMAGE_NAME }}1
+          run: docker push ${{ env.DOCKER_REPOSITORY }}/${{ env.IMAGE_NAME }}1
         
-        - name: Run Trivy Vulnerability Scanner
-          uses: aquasecurity/trivy-action@master
-          continue-on-error: true
-          with:
-            image-ref: 'docker.io/${{ env.DOCKER_REPOSITORY }}/${{ env.IMAGE_NAME }}:latest'
-            format: 'table'
-            exit-code: '1'
-            ignore-unfixed: true
-            vuln-type: 'os,library'
-            severity: 'MEDIUM,HIGH,CRITICAL'
+        - name: Build Docker Image 2 ${{ env.IMAGE_NAME }}2
+          run: docker build -f server2/Dockerfile -t ${{ env.DOCKER_REPOSITORY }}/${{ env.IMAGE_NAME }}2:${{ env.IMAGE_TAG }} -t ${{ env.DOCKER_REPOSITORY }}/${{ env.IMAGE_NAME }}2:latest .
+          
+        - name: Push Docker Image 2 ${{ env.IMAGE_NAME }}2
+          run: docker push ${{ env.DOCKER_REPOSITORY }}/${{ env.IMAGE_NAME }}2
 
         - name: Install kubectl
           uses: azure/setup-kubectl@v1
@@ -77,10 +71,25 @@ jobs:
         - name: Update kube config
           run: aws eks update-kubeconfig --name ${{ env.CLUSTER_NAME }}
 
-        - name: Deploy image to Amazon EKS
+        - name: Deploy image server 1 to Amazon EKS
           run: |           
-            kubectl apply -f k8s/${{ env.WORKING_DIRECTORY }}/deployment.yaml
-            kubectl apply -f k8s/${{ env.WORKING_DIRECTORY }}/service.yaml 
+            kubectl apply -f ../k8s/server1/${{ env.WORKING_DIRECTORY }}/deployment.yaml
+            kubectl apply -f ../k8s/server1/${{ env.WORKING_DIRECTORY }}/service.yaml 
+
+        - name: Deploy image server 2 to Amazon EKS
+          run: |           
+            kubectl apply -f ../k8s/server2/${{ env.WORKING_DIRECTORY }}/deployment.yaml
+            kubectl apply -f ../k8s/server2/${{ env.WORKING_DIRECTORY }}/service.yaml 
+
+        - name: Deploy image server 2 to Amazon EKS
+          run: |           
+            kubectl apply -f ../k8s/server3/${{ env.WORKING_DIRECTORY }}/deployment.yaml
+            kubectl apply -f ../k8s/server3/${{ env.WORKING_DIRECTORY }}/service.yaml 
+
+        - name: Deploy image server 4 to Amazon EKS
+          run: |           
+            kubectl apply -f ../k8s/server4/${{ env.WORKING_DIRECTORY }}/deployment.yaml
+            kubectl apply -f ../k8s/server4/${{ env.WORKING_DIRECTORY }}/service.yaml 
 
         - name: List kube nodes
           run: kubectl get svc

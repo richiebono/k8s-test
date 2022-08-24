@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webserver1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: webserver1
+  template:
+    metadata:
+      labels:
+        app: webserver1
+    spec:
+      containers:
+      - name: webserver1
+        image: richiebono/k8s-test1
+        ports:
+        - containerPort: 8081

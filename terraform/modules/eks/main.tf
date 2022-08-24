@@ -96,7 +96,7 @@ resource "aws_iam_role_policy_attachment" "node-AmazonEC2ContainerRegistryReadOn
 resource "aws_eks_node_group" "node" {
   count = 2
   cluster_name = aws_eks_cluster.cluster.name
-  node_group_name = "${var.prefix}-${var.cluster_name}-node-${[count.index]}"
+  node_group_name = "${var.prefix}-${var.cluster_name}-node-${count.index}"
   node_role_arn = aws_iam_role.node.arn
   subnet_ids = var.subnet_ids
   instance_types = var.aws_instance_types

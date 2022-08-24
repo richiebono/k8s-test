@@ -1,0 +1,32 @@
+22-08-24 15:45:59.1575918 pid:51592 tid:1 sqltools Critical: 0 : An unhandled exception occurred: System.OutOfMemoryException: Exception of type 'System.OutOfMemoryException' was thrown.
+   at System.Array.EmptyArray`1..cctor()
+   at System.RuntimeType.RuntimeTypeCache.MemberInfoCache`1.PopulateEvents(Filter filter)
+   at System.RuntimeType.RuntimeTypeCache.MemberInfoCache`1.GetListByName(Char* pName, Int32 cNameLen, Byte* pUtf8Name, Int32 cUtf8Name, MemberListType listType, CacheType cacheType)
+   at System.RuntimeType.RuntimeTypeCache.MemberInfoCache`1.Populate(String name, MemberListType listType, CacheType cacheType)
+   at System.RuntimeType.RuntimeTypeCache.MemberInfoCache`1.GetMemberList(MemberListType listType, String name, CacheType cacheType)
+   at System.RuntimeType.GetEventCandidates(String name, BindingFlags bindingAttr, Boolean allowPrefixLookup)
+   at System.RuntimeType.GetMembers(BindingFlags bindingAttr)
+   at System.Xml.Serialization.StructModel.GetMemberInfos()
+   at System.Xml.Serialization.XmlReflectionImporter.InitializeStructMembers(StructMapping mapping, StructModel model, Boolean openModel, String typeName, RecursionLimiter limiter)
+   at System.Xml.Serialization.XmlReflectionImporter.ImportStructLikeMapping(StructModel model, String ns, Boolean openModel, XmlAttributes a, RecursionLimiter limiter)
+   at System.Xml.Serialization.XmlReflectionImporter.ImportTypeMapping(TypeModel model, String ns, ImportContext context, String dataType, XmlAttributes a, Boolean repeats, Boolean openModel, RecursionLimiter limiter)
+   at System.Xml.Serialization.XmlReflectionImporter.ImportElement(TypeModel model, XmlRootAttribute root, String defaultNamespace, RecursionLimiter limiter)
+   at System.Xml.Serialization.XmlReflectionImporter.ImportTypeMapping(Type type, XmlRootAttribute root, String defaultNamespace)
+   at System.Xml.Serialization.XmlSerializer..ctor(Type type, String defaultNamespace)
+   at Microsoft.SqlTools.ServiceLayer.ObjectExplorer.SmoModel.NodePathGenerator.Initialize() in D:\a\_work\1\s\src\Microsoft.SqlTools.ServiceLayer\ObjectExplorer\SmoModel\NodePathGenerator.cs:line 26
+   at Microsoft.SqlTools.ServiceLayer.ObjectExplorer.ObjectExplorerService..ctor() in D:\a\_work\1\s\src\Microsoft.SqlTools.ServiceLayer\ObjectExplorer\ObjectExplorerService.cs:line 62
+   at lambda_method110(Closure , LifetimeContext , CompositionOperation )
+   at System.Composition.TypedParts.ActivationFeatures.DisposalFeature.<>c__DisplayClass0_0.<RewriteActivator>b__0(LifetimeContext c, CompositionOperation o)
+   at System.Composition.Hosting.Providers.ImportMany.ImportManyExportDescriptorProvider.<>c__DisplayClass3_2`1.<GetImportManyDescriptor>b__4(ExportDescriptor e)
+   at System.Linq.Enumerable.SelectArrayIterator`2.ToArray()
+   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   at System.Composition.Hosting.Providers.ImportMany.ImportManyExportDescriptorProvider.<>c__DisplayClass3_1`1.<GetImportManyDescriptor>b__3(LifetimeContext c, CompositionOperation o)
+   at System.Composition.Hosting.Core.CompositionOperation.Run(LifetimeContext outermostLifetimeContext, CompositeActivator compositionRootActivator)
+   at System.Composition.Hosting.Core.LifetimeContext.TryGetExport(CompositionContract contract, Object& export)
+   at System.Composition.Hosting.CompositionHost.TryGetExport(CompositionContract contract, Object& export)
+   at System.Composition.CompositionContext.GetExport(CompositionContract contract)
+   at System.Composition.CompositionContext.GetExports(Type exportType, String contractName)
+   at System.Composition.CompositionContext.GetExports(Type exportType)
+   at Microsoft.SqlTools.Extensibility.ExtensionStore.GetExports[T]() in D:\a\_work\1\s\src\Microsoft.SqlTools.Hosting\Extensibility\ExtensionServiceProvider.cs:line 190
+   at Microsoft.SqlTools.Extensibility.ExtensionServiceProvider.<>c__DisplayClass8_0`1.<EnsureExtensionStoreRegistered>b__0() in D:\a\_work\1\s\src\Microsoft.SqlTools.Hosting\Extensibility\ExtensionServiceProvider.cs:line 115
+   at Microsoft.Sql

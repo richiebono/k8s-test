@@ -84,12 +84,13 @@ jobs:
           run: aws eks update-kubeconfig --name ${{ env.CLUSTER_NAME }}
 
         - name: Deploy image server 1 to Amazon EKS
-          run: |           
+          run: |     
+            kubectl delete svc webserver2
+            kubectl delete svc webserver3
+            kubectl delete svc webserver4      
             kubectl apply -f k8s/server1/deployment.yaml
             kubectl apply -f k8s/server1/service.yaml 
-            kubectl delete svc service2
-            kubectl delete svc service3
-            kubectl delete svc service4
+            
 
         # - name: Deploy image server 2 to Amazon EKS
         #   run: |           

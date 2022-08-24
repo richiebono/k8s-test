@@ -51,6 +51,18 @@ jobs:
         - name: Push Docker Image 2 ${{ env.IMAGE_NAME }}2
           run: docker push ${{ env.DOCKER_REPOSITORY }}/${{ env.IMAGE_NAME }}2
 
+        - name: Build Docker Image 3 ${{ env.IMAGE_NAME }}3
+          run: docker build -f server3/Dockerfile -t ${{ env.DOCKER_REPOSITORY }}/${{ env.IMAGE_NAME }}3:${{ env.IMAGE_TAG }} -t ${{ env.DOCKER_REPOSITORY }}/${{ env.IMAGE_NAME }}3:latest .
+          
+        - name: Push Docker Image 3 ${{ env.IMAGE_NAME }}3
+          run: docker push ${{ env.DOCKER_REPOSITORY }}/${{ env.IMAGE_NAME }}3
+
+        - name: Build Docker Image 4 ${{ env.IMAGE_NAME }}4
+          run: docker build -f server4/Dockerfile -t ${{ env.DOCKER_REPOSITORY }}/${{ env.IMAGE_NAME }}4:${{ env.IMAGE_TAG }} -t ${{ env.DOCKER_REPOSITORY }}/${{ env.IMAGE_NAME }}4:latest .
+          
+        - name: Push Docker Image 4 ${{ env.IMAGE_NAME }}4
+          run: docker push ${{ env.DOCKER_REPOSITORY }}/${{ env.IMAGE_NAME }}4
+
         - name: Install kubectl
           uses: azure/setup-kubectl@v1
           with:
@@ -73,23 +85,23 @@ jobs:
 
         - name: Deploy image server 1 to Amazon EKS
           run: |           
-            kubectl apply -f ../k8s/server1/${{ env.WORKING_DIRECTORY }}/deployment.yaml
-            kubectl apply -f ../k8s/server1/${{ env.WORKING_DIRECTORY }}/service.yaml 
+            kubectl apply -f ../k8s/server1/deployment.yaml
+            kubectl apply -f ../k8s/server1/service.yaml 
 
         - name: Deploy image server 2 to Amazon EKS
           run: |           
-            kubectl apply -f ../k8s/server2/${{ env.WORKING_DIRECTORY }}/deployment.yaml
-            kubectl apply -f ../k8s/server2/${{ env.WORKING_DIRECTORY }}/service.yaml 
+            kubectl apply -f ../k8s/server2/deployment.yaml
+            kubectl apply -f ../k8s/server2/service.yaml 
 
         - name: Deploy image server 2 to Amazon EKS
           run: |           
-            kubectl apply -f ../k8s/server3/${{ env.WORKING_DIRECTORY }}/deployment.yaml
-            kubectl apply -f ../k8s/server3/${{ env.WORKING_DIRECTORY }}/service.yaml 
+            kubectl apply -f ../k8s/server3/deployment.yaml
+            kubectl apply -f ../k8s/server3/service.yaml 
 
         - name: Deploy image server 4 to Amazon EKS
           run: |           
-            kubectl apply -f ../k8s/server4/${{ env.WORKING_DIRECTORY }}/deployment.yaml
-            kubectl apply -f ../k8s/server4/${{ env.WORKING_DIRECTORY }}/service.yaml 
+            kubectl apply -f ../k8s/server4/deployment.yaml
+            kubectl apply -f ../k8s/server4/service.yaml 
 
         - name: List kube nodes
           run: kubectl get svc

@@ -85,23 +85,23 @@ jobs:
 
         - name: Deploy image server 1 to Amazon EKS
           run: |           
-            kubectl apply -f ../k8s/server1/deployment.yaml
-            kubectl apply -f ../k8s/server1/service.yaml 
+            kubectl apply -f k8s/server1/deployment.yaml
+            kubectl apply -f k8s/server1/service.yaml 
 
         - name: Deploy image server 2 to Amazon EKS
           run: |           
-            kubectl apply -f ../k8s/server2/deployment.yaml
-            kubectl apply -f ../k8s/server2/service.yaml 
+            kubectl apply -f k8s/server2/deployment.yaml
+            kubectl apply -f k8s/server2/service.yaml 
 
         - name: Deploy image server 2 to Amazon EKS
           run: |           
-            kubectl apply -f ../k8s/server3/deployment.yaml
-            kubectl apply -f ../k8s/server3/service.yaml 
+            kubectl apply -f k8s/server3/deployment.yaml
+            kubectl apply -f k8s/server3/service.yaml 
 
         - name: Deploy image server 4 to Amazon EKS
           run: |           
-            kubectl apply -f ../k8s/server4/deployment.yaml
-            kubectl apply -f ../k8s/server4/service.yaml 
+            kubectl apply -f k8s/server4/deployment.yaml
+            kubectl apply -f k8s/server4/service.yaml 
 
         - name: List kube nodes
           run: kubectl get svc

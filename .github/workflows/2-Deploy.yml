@@ -16,7 +16,7 @@ jobs:
           IMAGE_NAME: k8s-test
           IMAGE_TAG: ${{github.run_number}}
           WORKING_DIRECTORY: .
-          CLUSTER_NAME: k8s-test
+          CLUSTER_NAME: bono-k8s-test
           CLUSTER_REGION: us-east-1
 
         defaults:
